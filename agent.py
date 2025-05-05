@@ -47,7 +47,7 @@ tools = []
 
 # You can use UDFs in Unity Catalog as agent tools
 # TODO change the catalog name here
-catalog = "ananyaroy"
+catalog = catalog
 schema = "agent_workshop"
 uc_tool_names = [f"{catalog}.{schema}.*"]
 uc_toolkit = UCFunctionToolkit(function_names=uc_tool_names)

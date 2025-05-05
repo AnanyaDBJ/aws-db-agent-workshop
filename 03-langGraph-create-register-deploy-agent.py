@@ -91,8 +91,8 @@ UC_MODEL_NAME = f"{catalog}.{schema}.{model_name}"
 # MAGIC
 # MAGIC # You can use UDFs in Unity Catalog as agent tools
 # MAGIC # TODO change the catalog name here
-# MAGIC catalog = "ananyaroy"
-# MAGIC schema = "agent_workshop"
+# MAGIC catalog = catalog
+# MAGIC schema = schema
 # MAGIC uc_tool_names = [f"{catalog}.{schema}.*"]
 # MAGIC uc_toolkit = UCFunctionToolkit(function_names=uc_tool_names)
 # MAGIC tools.extend(uc_toolkit.tools)
