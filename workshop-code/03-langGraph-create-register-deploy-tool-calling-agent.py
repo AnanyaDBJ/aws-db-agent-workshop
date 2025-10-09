@@ -6,17 +6,18 @@
 
 # COMMAND ----------
 
-# MAGIC %pip install -U -qqqq mlflow langchain langgraph==0.3.4 databricks-langchain pydantic databricks-agents unitycatalog-langchain[databricks] uv
+# MAGIC %pip install -U -qqqq mlflow langchain langgraph==0.3.4 databricks-langchain pydantic databricks-agents unitycatalog-langchain[databricks] uv mlflow-skinny[databricks]
 # MAGIC dbutils.library.restartPython()
 
 # COMMAND ----------
 
 #Define the catalog name for each user 
-workspace_url = dbutils.notebook.entry_point.getDbutils().notebook().getContext().apiUrl().get()
-digits = ''.join(filter(str.isdigit, workspace_url))
-catalog = 'catalog_' + digits
+# workspace_url = dbutils.notebook.entry_point.getDbutils().notebook().getContext().apiUrl().get()
+# digits = ''.join(filter(str.isdigit, workspace_url))
+# catalog = 'catalog_' + digits
+catalog = "ananyaroy"
 
-schema = "agent_workshop"
+schema = "agent_workshop_tabcorp"
 VS_INDEX_NAME = f"{catalog}.{schema}.guidance_gold_index"
 
 model_name = "financial_assistance_agent"
@@ -66,7 +67,7 @@ UC_MODEL_NAME = f"{catalog}.{schema}.{model_name}"
 # MAGIC ############################################
 # MAGIC # Define your LLM endpoint and system prompt
 # MAGIC ############################################
-# MAGIC LLM_ENDPOINT_NAME = "<databricks model serving endpoint name>"
+# MAGIC LLM_ENDPOINT_NAME = "databricks-claude-3-7-sonnet"
 # MAGIC llm = ChatDatabricks(endpoint=LLM_ENDPOINT_NAME)
 # MAGIC
 # MAGIC system_prompt = "You are an intelligent financial portfolio conversational assistant and fraud support agent. You have multiple tools at your dispposal to use and answer user queries.Read all the capabilities of each tool and make informed decision of what tools to use based on user question. Do not make things on your own if you don't know anything. You also can perform actions based on user need. If customer has not provided with customer Id , authenticate customers first with first name , last name and postcode before the first conversation"
@@ -81,8 +82,8 @@ UC_MODEL_NAME = f"{catalog}.{schema}.{model_name}"
 # MAGIC
 # MAGIC # You can use UDFs in Unity Catalog as agent tools
 # MAGIC # TODO change the catalog name here
-# MAGIC catalog = "<catalog name>"
-# MAGIC schema = "agent_workshop"
+# MAGIC catalog = "ananyaroy"
+# MAGIC schema = "agent_workshop_tabcorp"
 # MAGIC uc_tool_names = [f"{catalog}.{schema}.*"]
 # MAGIC uc_toolkit = UCFunctionToolkit(function_names=uc_tool_names)
 # MAGIC tools.extend(uc_toolkit.tools)
@@ -238,6 +239,9 @@ from mlflow.models.resources import (
     DatabricksVectorSearchIndex,
     DatabricksFunction
 )
+catalog = "ananyaroy"
+schema = "agent_workshop_tabcorp"
+VS_INDEX_NAME = f"{catalog}.{schema}.guidance_gold_index"
 
 # TODO: Manually include underlying resources if needed. See the TODO in the markdown above for more information.
 resources = [DatabricksServingEndpoint(endpoint_name=LLM_ENDPOINT_NAME),
@@ -296,6 +300,9 @@ import mlflow
 
 mlflow.set_registry_uri("databricks-uc")
 
+model_name = "financial_assistance_agent"
+
+UC_MODEL_NAME = f"{catalog}.{schema}.{model_name}"
 # register the model to UC
 uc_registered_model_info = mlflow.register_model(
     model_uri=logged_agent_info.model_uri, name=UC_MODEL_NAME
