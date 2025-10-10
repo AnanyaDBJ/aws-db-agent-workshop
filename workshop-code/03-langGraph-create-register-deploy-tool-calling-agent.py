@@ -17,7 +17,7 @@
 # catalog = 'catalog_' + digits
 catalog = "ananyaroy"
 
-schema = "agent_workshop_tabcorp"
+schema = "tabcorp_workshop"
 VS_INDEX_NAME = f"{catalog}.{schema}.guidance_gold_index"
 
 model_name = "financial_assistance_agent"
@@ -83,7 +83,7 @@ UC_MODEL_NAME = f"{catalog}.{schema}.{model_name}"
 # MAGIC # You can use UDFs in Unity Catalog as agent tools
 # MAGIC # TODO change the catalog name here
 # MAGIC catalog = "ananyaroy"
-# MAGIC schema = "agent_workshop_tabcorp"
+# MAGIC schema = "tabcorp_workshop"
 # MAGIC uc_tool_names = [f"{catalog}.{schema}.*"]
 # MAGIC uc_toolkit = UCFunctionToolkit(function_names=uc_tool_names)
 # MAGIC tools.extend(uc_toolkit.tools)
@@ -240,7 +240,7 @@ from mlflow.models.resources import (
     DatabricksFunction
 )
 catalog = "ananyaroy"
-schema = "agent_workshop_tabcorp"
+schema = "tabcorp_workshop"
 VS_INDEX_NAME = f"{catalog}.{schema}.guidance_gold_index"
 
 # TODO: Manually include underlying resources if needed. See the TODO in the markdown above for more information.
